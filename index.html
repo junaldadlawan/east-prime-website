@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>East Prime Print Lab</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap');
+
+  :root{
+    --bg: #faf9f7;
+    --bg-2: #f2f0eb;
+    --surface: #ffffff;
+    --surface-2: #f5f3ef;
+    --line: #e6e3dc;
+    --black: #131313;
+    --orange: #ff5a1f;
+    --orange-deep: #db4a15;
+    --white: #ffffff;
+    --text: #161616;
+    --text-muted: #5c5c5e;
+    --text-dim: #97959a;
+    --shadow: 0 1px 2px rgba(19,19,19,0.04), 0 10px 26px rgba(19,19,19,0.05);
+  }
+
+  *{ box-sizing: border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection{ background: var(--orange); color: var(--white); }
+  img{ max-width:100%; display:block; }
+  a{ color: inherit; }
+
+  .label{
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-weight: 600;
+  }
+
+  /* ---------- Nav ---------- */
+  header.nav{
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    padding: 16px 5vw;
+    background: rgba(250,249,247,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .brand{ display:flex; align-items:center; gap:10px; text-decoration:none; }
+  .brand-mark{ height: 30px; width:auto; }
+  .brand-text{
+    font-family:'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: 19px;
+    color: var(--black);
+    letter-spacing: -0.01em;
+  }
+  .brand-text em{ font-style:normal; color: var(--orange); }
+  nav.links{ display:flex; gap: 28px; align-items:center; }
+  nav.links a{
+    text-decoration:none;
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+  .label.small{ font-size: 12px; }
+  nav.links a:hover{ color: var(--black); }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background: var(--orange);
+    color: var(--white);
+    font-family:'Oswald', sans-serif;
+    font-weight:600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 13px;
+    text-decoration:none;
+    padding: 11px 22px;
+    border-radius: 3px;
+    border: none;
+    transition: background-color .15s;
+  }
+  .btn:hover{ background: var(--orange-deep); }
+  .btn.ghost{
+    background: transparent;
+    color: var(--black);
+    border: 1.5px solid var(--black);
+  }
+  .btn.ghost:hover{
+    color: var(--orange);
+    border-color: var(--orange);
+    background: transparent;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position: relative;
+    overflow: hidden;
+    padding: 108px 5vw 96px;
+    text-align:center;
+    background: var(--bg);
+  }
+  .hero .sun{
+    width: 180px;
+    margin: 0 auto 28px;
+  }
+  .eyebrow{
+    color: var(--orange);
+    font-size: 12px;
+    margin-bottom: 22px;
+  }
+  h1.hero-title{
+    font-family:'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: clamp(34px, 5.6vw, 60px);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    margin: 0 0 20px;
+    text-wrap: balance;
+    color: var(--black);
+  }
+  h1.hero-title .accent{ color: var(--orange); }
+  .hero-sub{
+    max-width: 58ch;
+    margin: 0 auto 36px;
+    color: var(--text-muted);
+    font-size: 17px;
+  }
+  .hero-cta{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+
+  .horizon{
+    height: 2px;
+    background: var(--orange);
+  }
+
+  /* ---------- Section shell ---------- */
+  section{ padding: 88px 5vw; }
+  .inner{ max-width: 1080px; margin: 0 auto; }
+  .section-head{ max-width: 62ch; margin-bottom: 44px; }
+  .section-head .label{ color: var(--orange); font-size: 12px; margin-bottom: 10px; display:block; }
+  h2{
+    font-family:'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: clamp(26px, 3.6vw, 36px);
+    color: var(--black);
+    margin: 0 0 12px;
+    text-wrap: balance;
+  }
+  .section-head p{ color: var(--text-muted); margin:0; }
+
+  /* ---------- Story ---------- */
+  .story{ background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .story .inner{ display:grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items:center; }
+  .story p{ color: var(--text-muted); margin: 0 0 16px; max-width: 52ch; }
+  .story p strong{ color: var(--black); }
+  .story-visual{
+    position: relative;
+    border-radius: 4px;
+    overflow:hidden;
+    aspect-ratio: 4/3;
+    background: var(--black);
+    display:flex;
+    align-items:flex-end;
+    padding: 24px;
+  }
+  .story-visual .tag{
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 3px;
+    padding: 12px 16px;
+    font-family:'Oswald', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+  .story-visual .tag em{ font-style:normal; color: var(--orange); }
+
+  /* ---------- Capabilities ---------- */
+  .grid-8{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+  .cap{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 22px 18px;
+    text-align:center;
+    transition: border-color .15s, transform .15s;
+  }
+  .cap:hover{ border-color: var(--orange); transform: translateY(-2px); }
+  .cap svg{ width:30px; height:30px; margin: 0 auto 14px; stroke: var(--black); transition: stroke .15s; }
+  .cap:hover svg{ stroke: var(--orange); }
+  .cap span{
+    font-family:'Oswald', sans-serif;
+    font-size: 12.5px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text);
+    display:block;
+  }
+  .cap.new::after{
+    content: 'New capability';
+    display:block;
+    margin-top: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--text-dim);
+  }
+
+  /* ---------- Product lines ---------- */
+  .lines{ background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .grid-lines{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+  .line-card{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 26px 22px;
+    display:flex;
+    flex-direction:column;
+    gap: 10px;
+  }
+  .line-card .num{ font-family:'Oswald',sans-serif; color: var(--orange); font-size: 12px; letter-spacing:0.08em; }
+  .line-card h3{ font-family:'Baloo 2', sans-serif; font-size: 19px; color: var(--black); margin: 0; }
+  .line-card p{ color: var(--text-muted); font-size: 13.5px; margin:0; flex:1; }
+  .pill{
+    align-self:flex-start;
+    font-family:'Oswald', sans-serif;
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--black);
+    padding: 4px 10px;
+    border-radius: 100px;
+  }
+
+  /* ---------- Trust badges ---------- */
+  .badges{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    text-align:center;
+  }
+  .badge svg{ width:28px; height:28px; stroke: var(--black); margin: 0 auto 12px; }
+  .badge span{ font-family:'Oswald', sans-serif; font-size: 12.5px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text); }
+
+  /* ---------- Serve ---------- */
+  .grid-serve{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .serve-card{
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 22px;
+    background: var(--surface);
+  }
+  .serve-card h4{ font-family:'Baloo 2', sans-serif; color: var(--black); margin: 0 0 8px; font-size: 17px; }
+  .serve-card p{ color: var(--text-muted); font-size: 13.5px; margin:0; }
+
+  /* ---------- Contact band ---------- */
+  .contact{
+    text-align:center;
+    background: var(--black);
+  }
+  .contact h2{ margin-bottom: 14px; color: var(--white); }
+  .contact h2 em{ font-style:normal; color: var(--orange); }
+  .contact p{ color: rgba(255,255,255,0.62); max-width: 50ch; margin: 0 auto 30px; }
+
+  footer{
+    padding: 32px 5vw;
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+    flex-wrap: wrap;
+    gap: 16px;
+    border-top: 1px solid var(--line);
+  }
+  footer .brand-mark{ height: 22px; }
+  footer .brand-text{ font-size: 16px; }
+  footer .fine{ color: var(--text-dim); font-size: 12px; }
+
+  @media (max-width: 860px){
+    .story .inner{ grid-template-columns: 1fr; }
+    .grid-8{ grid-template-columns: repeat(2, 1fr); }
+    .grid-lines{ grid-template-columns: repeat(2, 1fr); }
+    .badges{ grid-template-columns: repeat(2, 1fr); }
+    .grid-serve{ grid-template-columns: repeat(2, 1fr); }
+    nav.links{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <a class="brand" href="#">
+    <img class="brand-mark" src="assets/sun-mark.png" alt="East Prime Print Lab">
+    <span class="brand-text">East<em>Prime</em></span>
+  </a>
+  <nav class="links">
+    <a href="#capabilities" class="label small">Capabilities</a>
+    <a href="#lines" class="label small">Product Lines</a>
+    <a href="#serve" class="label small">Who We Serve</a>
+    <a href="#contact" class="label small">Contact</a>
+  </nav>
+  <!-- TODO: point this at your real Facebook Page / Messenger link -->
+  <a class="btn" href="#contact">Message Us</a>
+</header>
+
+<section class="hero">
+  <img class="sun" src="assets/sun-mark.png" alt="">
+  <p class="label eyebrow">Imagine · Create · Print</p>
+  <h1 class="hero-title">A new sun is rising<br>over <span class="accent">Philippine printing</span>.</h1>
+  <p class="hero-sub">East Prime Print Lab is just getting started — sublimation, mugs, stickers, IDs, and event merch, engineered under one roof and priced for buyers who order in bulk. This is day one. Watch us take over.</p>
+  <div class="hero-cta">
+    <a class="btn" href="#contact">Message Us for a Quote</a>
+    <a class="btn ghost" href="#capabilities">See What We Print</a>
+  </div>
+</section>
+<div class="horizon"></div>
+
+<section class="story" id="story">
+  <div class="inner">
+    <div>
+      <p class="label" style="color:var(--orange); font-size:12px; margin-bottom:10px;">Where we're headed</p>
+      <h2 style="margin-bottom:18px;">Built as one shop, so you never need five.</h2>
+      <p>Most print shops specialize in one thing — a sticker shop, a mug shop, an ID printer. <strong>East Prime runs sublimation, mug production, vinyl cutting, ID lamination, and DTF pressing under one roof</strong>, which means a school or office ordering an entire event's merch talks to one vendor instead of coordinating four.</p>
+      <p>No storefront means no overhead padding the price — and it means we're built from day one to work the way institutional buyers actually order: online, in bulk, on a schedule.</p>
+    </div>
+    <div class="story-visual">
+      <span class="tag">Sunrise <em>&rarr;</em> full daylight, one shop at a time</span>
+    </div>
+  </div>
+</section>
+
+<section id="capabilities">
+  <div class="inner">
+    <div class="section-head">
+      <span class="label">What we print</span>
+      <h2>Eight capabilities, one order form.</h2>
+      <p>Every job below runs through the same shop — mix and match across a single quote.</p>
+    </div>
+    <div class="grid-8">
+      <div class="cap">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="14.5" r="4"/><path d="M12 3v3M6.3 6.3l2.1 2.1M17.7 6.3l-2.1 2.1"/></svg>
+        <span>Sublimation Printing</span>
+      </div>
+      <div class="cap">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h11v14a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"/><path d="M15 7h3a2 2 0 012 2v3a2 2 0 01-2 2h-3"/></svg>
+        <span>Mug Printing</span>
+      </div>
+      <div class="cap">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="4" rx="1"/><path d="M12 8v5"/><rect x="4" y="15" width="16" height="4" rx="1"/></svg>
+        <span>Heat Press</span>
+      </div>
+      <div class="cap">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="1"/><path d="M8.5 8h7M8.5 12h7M8.5 16h4"/></svg>
+        <span>Graphics Printing</span>
+      </div>
+      <div class="cap">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4L4 7v3h2v10h12V10h2V7l-4-3-2 2h-4z"/><rect x="10" y="11" width="4" height="4"/></svg>
+        <span>DTF Printing</span>
+      </div>
+      <div class="cap">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><circle cx="9" cy="10" r="1.3" fill="currentColor" stroke="none"/><path d="M4.5 17l4.5-4.5 3.5 3.5 3-3 4 4"/></svg>
+        <span>Picture Printing</span>
+      </div>
+      <div class="cap">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h9l5 5v9a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2z"/><path d="M15 4v5h5"/></svg>
+        <span>Sticker Printing</span>
+      </div>
+      <div class="cap new">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="16" rx="2"/><path d="M10 2v3M14 2v3"/><circle cx="12" cy="10.5" r="2.2"/><path d="M9 16.3c0-1.4 1.3-2.3 3-2.3s3 .9 3 2.3"/></svg>
+        <span>ID &amp; Lanyard</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="lines" id="lines">
+  <div class="inner">
+    <div class="section-head">
+      <span class="label">Built for scale</span>
+      <h2>Series, not one-offs.</h2>
+      <p>Pre-designed collections that only need a name swapped — fast to quote, fast to produce, priced for bulk. Fully custom design is always available too.</p>
+    </div>
+    <div class="grid-lines">
+      <div class="line-card">
+        <span class="num">01</span>
+        <h3>Mug Series</h3>
+        <p>Ready-made designs personalized with a name — teacher gifts, batch mugs, appreciation giveaways.</p>
+        <span class="pill">Bulk pricing soon</span>
+      </div>
+      <div class="line-card">
+        <span class="num">02</span>
+        <h3>Sticker Series</h3>
+        <p>Decals and nameplates for school orgs, barangay campaigns, and supporter drives.</p>
+        <span class="pill">Bulk pricing soon</span>
+      </div>
+      <div class="line-card">
+        <span class="num">03</span>
+        <h3>ID &amp; Lanyard Bundle</h3>
+        <p>Full badge systems for schools and organizations — printed, laminated, and cut in-house.</p>
+        <span class="pill">Bulk pricing soon</span>
+      </div>
+      <div class="line-card">
+        <span class="num">04</span>
+        <h3>Event Kit</h3>
+        <p>Shirt, mug, and sticker bundled for graduations, seminars, and outreach programs.</p>
+        <span class="pill">Bulk pricing soon</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="inner">
+    <div class="badges">
+      <div class="badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4L12 14.4 7.2 16.9l.9-5.4-3.9-3.8 5.4-.8z"/></svg>
+        <span>Premium Quality</span>
+      </div>
+      <div class="badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+        <span>Fast Turnaround</span>
+      </div>
+      <div class="badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0112 6.5 5.5 5.5 0 0121.5 12c-2.5 4.5-9.5 9-9.5 9z"/></svg>
+        <span>Made With Passion</span>
+      </div>
+      <div class="badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></svg>
+        <span>Print Beyond Ordinary</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="serve" style="background:var(--bg-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+  <div class="inner">
+    <div class="section-head">
+      <span class="label">Who we serve</span>
+      <h2>Built for buyers who order more than one.</h2>
+      <p>Individual custom orders are always welcome — but the shop is built around buyers ordering for a whole group.</p>
+    </div>
+    <div class="grid-serve">
+      <div class="serve-card">
+        <h4>Schools</h4>
+        <p>Teachers' Day, Foundation Day, graduation, and batch giveaways — standing supplier for the school year.</p>
+      </div>
+      <div class="serve-card">
+        <h4>Government &amp; LGU Offices</h4>
+        <p>Barangay and municipal events — tokens, IDs, and giveaways under small-value procurement.</p>
+      </div>
+      <div class="serve-card">
+        <h4>Organizations &amp; Businesses</h4>
+        <p>NGOs, church groups, and companies needing branded giveaways or event kits.</p>
+      </div>
+      <div class="serve-card">
+        <h4>Everyday Custom Orders</h4>
+        <p>One mug, one shirt, one keepsake — fully custom, made the same way as the big orders.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="inner">
+    <h2>Need it printed?<br>Just <em>message us</em>.</h2>
+    <p>Tell us what you need, how many, and when — quotations go out fast.</p>
+    <!-- TODO: point this at your real Facebook Page / Messenger link -->
+    <a class="btn" href="#">Message Us on Facebook</a>
+  </div>
+</section>
+
+<footer>
+  <a class="brand" href="#">
+    <img class="brand-mark" src="assets/sun-mark.png" alt="East Prime Print Lab">
+    <span class="brand-text">East<em>Prime</em></span>
+  </a>
+  <span class="fine">Imagine · Create · Print — catalog and bulk pricing coming soon.</span>
+</footer>
+
+</body>
+</html>
