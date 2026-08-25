@@ -297,11 +297,14 @@
     align-items:center;
     flex-wrap: wrap;
     gap: 16px;
-    border-top: 1px solid var(--line);
+    background: var(--black);
+    border-top: 1px solid rgba(255,255,255,0.08);
   }
   footer .brand-mark{ height: 22px; }
-  footer .brand-text{ font-size: 16px; color: var(--black); }
-  footer .fine{ color: var(--text-dim); font-size: 12px; }
+  footer .brand-text{ font-size: 16px; color: var(--white); }
+  footer .fine{ color: rgba(255,255,255,0.5); font-size: 12px; }
+  footer .fine a{ color: rgba(255,255,255,0.75); }
+  footer .fine a:hover{ color: var(--orange); }
 
   @media (max-width: 860px){
     .story .inner{ grid-template-columns: 1fr; }
